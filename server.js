@@ -2,7 +2,7 @@ const express = require("express");
 const db = require("./models");
 const app = express();
 const session = require("express-session");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const routes = require("./routes");
 require("dotenv").config();
 
@@ -15,9 +15,14 @@ app.use(
     secret: "SECRET",
   })
 );
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.static("public"))
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3002")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use("/", routes);
 

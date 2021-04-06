@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./CSS/main.scss"
+import API from "../utils/API";
 
 
 function Main() {
+
+  const [clients, setClients] = useState([])
+
+  useEffect(() => {
+    loadClients()
+  }, [])
+  
+  const loadClients = () => {
+    API.getClients()
+      .then(res =>
+        setClients(res.data),
+        console.log(clients)
+        )
+        .catch((err) => {
+          console.log(err)
+        })
+  }
+  
     return (
       <div>
         <div className="container">
@@ -15,20 +34,16 @@ function Main() {
           
           <h3>Search existing Bids</h3>
           <div className="myUl">
+            {clients.length ? (
             <ul >
-              <li> Bid 1</li>
-              <li> Bid 2</li>
-              <li> Bid 3</li>
-              <li> Bid 4</li>
-              <li> Bid 5</li>
-              <li> Bid 6</li>
-              <li> Bid 7</li>
-              <li> Bid 8</li>
-              <li> Bid 9</li>
-              <li> Bid 10</li>
-              <li> Bid 11</li>
-              <li> Bid 12</li>
+                {clients.map(client => (
+                <li key={client.id}>{client.fullName}</li>
+                ))}              
             </ul>
+
+            ) : (
+              <h3>No Results</h3>
+            )}
           </div>
         </div>
       </div>

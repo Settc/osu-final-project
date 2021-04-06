@@ -2,6 +2,7 @@ import React from "react";
 //import { Link } from "react-router-dom";
 import "../App.css";
 import image from "../img/painttwo.png";
+import api from "../utils/API"
 //import companyLogo from "../firstpaint.jpg";
 
 class Home extends React.Component {
@@ -44,6 +45,7 @@ class Home extends React.Component {
   //     });
   //   });
   // }
+
   render() {
     return (
       <div>

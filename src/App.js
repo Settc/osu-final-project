@@ -11,6 +11,7 @@ import Materials from "./components/Materials";
 import Oldbids from "./components/Oldbids";
 import "./index.css";
 import "./components/CSS/theme.scss";
+import "./utils/API"
 
 
 const App = () => {
